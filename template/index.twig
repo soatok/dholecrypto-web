@@ -1,0 +1,204 @@
+{% extends "base.twig" %}
+{% block main %}
+    <h1>Dhole Cryptography</h1>
+    <em>
+        Secure, easy-to-use, cross-platform cryptography interface powered by
+        <strong><a href="https://libsodium.gitbook.io/doc/">libsodium</a></strong>.
+    </em>
+    <hr />
+
+    <div id="front-tab-container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="nav-item active">
+                <a class="nav-link active" href="#php" aria-controls="php" role="tab" data-toggle="tab">PHP</a>
+            </li>
+            <li role="presentation" class="nav-item">
+                <a class="nav-link" href="#nodejs" aria-controls="nodejs" role="tab" data-toggle="tab">Node.js</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="php">
+                <pre><code class="php">{% include "snippets/php.twig" %}</code></pre>
+                <p>Get Dhole for your PHP project:</p>
+                <pre><code class="terminal">composer require soatok/dhole-cryptography</code></pre>
+                <p>Also available <a href="https://github.com/soatok/dhole-cryptography">on Github</a>.</p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="nodejs">
+                <pre><code class="js">{% include "snippets/nodejs.twig" %}</code></pre>
+                <p>Get Dhole for your Node.js project:</p>
+                <pre><code class="terminal">npm install dhole-crypto</code></pre>
+                <p>Also available <a href="https://github.com/soatok/dholecrypto-js">on Github</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <h3>What is Dhole Cryptography?</h3>
+
+    <p>
+        <strong>Dhole Cryptography</strong> is a cross-platform libsodium wrapper that
+        solves the most fundamental security problems (encryption, signatures, password storage,
+        key management) while being as easy as possible for developer to use,
+        <em>then gets out of your way</em>.
+    </p>
+
+    <h3>Why Use Dhole Instead of Sodium?</h3>
+
+    <p>
+        Strictly speaking, if you use Dhole, you <em>are</em> using Sodium!
+    </p>
+    <p>
+        Sodium is a great library and is very hard to misuse, but it doesn't abstract
+        enough complexity away to make it easy to use.
+    </p>
+    <p>
+        Dhole eliminates this unnecessary complexity while still providing the same security
+        and secure-by-default philosophy:
+    </p>
+    <dl>
+        <dt>Need to encrypt a string?</dt>
+        <dd>
+            <p>
+            Your code will look like
+            <code class="javascript">ciphertext = Symmetric.encrypt(plaintext, key)</code>.
+            You don't even need to know what a <em>nonce</em> is. You don't need to worry
+            about output encoding and binary-safe storage. Ciphertexts are encoded with a
+            URL-safe variant of Base64 and contain an authenticated header which contains
+            version metadata (for forward compatibility).
+            </p>
+            <p>
+            Decryption looks exactly like you'd expect.:
+            <code class="javascript">plaintext = Symmetric.decrypt(cipher, key)</code>
+            </p>
+        </dd>
+
+        <dt>What about asymmetric (public key) encryption?</dt>
+        <dd>
+            <p>You've got options!</p>
+            <ul>
+                <li>Authenticated Public-Key Encryption:
+                    <code>Asymmetric.encrypt(plaintext, alicePublic, bobSecret)</code> and
+                    <code>Asymmetric.decrypt(ciphertext, aliceSecret, bobPublic)</code>.
+                </li>
+                <li>Anonymous Public-Key Encryption:
+                    <code>Asymmetric.seal(plaintext, alicePublic)</code> and
+                    <code>Asymmetric.unseal(ciphertext, aliceSecret)</code>.
+                </li>
+            </ul>
+        </dd>
+    </dl>
+    <p>
+        No boilerplate code needed. Just simple APIs and portable ciphertexts that won't
+        get chewed up by binary-unsafe transport/storage mechanisms.
+    </p>
+
+    <h3>What else does Dhole make easy?</h3>
+
+    <dl>
+        <dt>Digital Signatures</dt>
+        <dd>
+            <p>The API is as simple and minimalistic as you'd expect.</p>
+            <ul>
+                <li><code>signature = Asymmetric.sign(message, secretKey)</code></li>
+                <li><code>Asymmetric.verify(message, publicKey, signature)</code></li>
+            </ul>
+            <p>
+                Digital signatures are RFC 8032-compatible Ed25519 with an additional 32
+                bytes of randomness (to mitigate
+                <a href="https://research.kudelskisecurity.com/2017/10/04/defeating-eddsa-with-faults/">fault attacks</a>
+                at a protocol level).
+            </p>
+        </dd>
+
+        <dt>Symmetric-key authentication</dt>
+        <dd>
+            <p>No surprises here either.</p>
+            <ul>
+                <li><code>tag = Symmetric.auth(message, secretKey)</code></li>
+                <li><code>Symmetric.verify(message, sharedKey, tag)</code></li>
+            </ul>
+        </dd>
+
+        <dt>Password storage</dt>
+        <dd>
+            <p>Secure and forward-compatible password hashing combined with symmetric encryption.</p>
+            <pre><code class="javascript">{% include "snippets/example-pwhash.twig" %}</code></pre>
+            <p>
+                The <code>hash()</code>, <code>needsRehash()</code>, and <code>verify()</code>
+                API was inspired by PHP's design.
+            </p>
+        </dd>
+
+        <dt>Key management</dt>
+        <dd>
+            <p>
+                Dhole works on key objects rather than binary strings. To simplify various
+                use-cases, we provide a <code>Keyring</code> API that allows keys to be
+                serialized as binary-safe strings and loaded from said strings.
+            </p>
+            <pre><code class="javascript">{% include "snippets/example-keyring.twig" %}</code></pre>
+            <p>
+                <strong>Keywrap support is also included.</strong> If you pass a
+                <code>SymmetricKey</code> to the <code>Keyring</code> constructor,
+                it will encrypt all serialized keys.
+            </p>
+        </dd>
+    </dl>
+
+    <h3>What is a dhole anyway?</h3>
+    <p>
+        From the <a href="https://animals.sandiegozoo.org/animals/dhole">San Diego Zoo</a>
+        website:
+    </p>
+    <blockquote class="quote">
+        <strong>Dholes are dogs!</strong> The dhole (pronounced "dole") is also known as the
+        Asiatic wild dog, red dog, and whistling dog. It is about the size of a German
+        shepherd but looks more like a long-legged fox. This highly elusive and skilled jumper
+        is classified with wolves, coyotes, jackals, and foxes in the taxonomic family Canidae.
+    </blockquote>
+    <p>
+        Their moniker "whistling dog" comes from their use of high-pitched whistles to
+        communicate while hunting. They're totally bad-ass, and their communication
+        strategy is a good analogy for effective encryption in the animal kingdom.
+    </p>
+    <p>
+        They're also of <a href="https://soatok.com/about-soatok">personal significance</a>
+        to Soatok, the author of this library.
+    </p>
+
+    <h3>Other Inquiries</h3>
+
+    <h4>Language Support</h4>
+    <p>
+        If you'd like Dhole to be implemented in a programming language you want to use,
+        feel free to <a href="https://soatok.com/freelance">contact Soatok</a>.
+    </p>
+    <p>
+        If you'd like to do this work yourself, we have <a href="/test-vectors.json">test vectors</a>
+        available. For a detailed unit test example, please refer to
+        <a href="https://github.com/soatok/dholecrypto-js/tree/master/test">this directory</a>.
+    </p>
+
+    <h4>Commercial Licenses</h4>
+    <p>
+        Dhole is published under the very permissive ISC license. You can freely use Dhole
+        in your own works at no cost to you.
+    </p>
+    <p>
+        If you'd like to support Dhole's development, Soatok is willing to offer you a
+        commercial license. His up-to-date contact information is available
+        <a href="https://soatok.com/freelance">on this page</a>.
+    </p>
+
+    <h4>Other Ways to Support Development</h4>
+    <ul>
+        <li><a href="https://www.patreon.com/soatok">Patreon</a></li>
+        <li><a href="https://paypal.me/soatok">PayPal</a></li>
+        <li>Subscribe to <a href="https://twitch.tv/soatok">Soatok on Twitch</a> (and get
+            cute blue dhole emotes to use in other streams, too!)</li>
+    </ul>
+
+    <hr />
+{% endblock %}

@@ -1,0 +1,15 @@
+const {
+    Asymmetric,
+    AsymmetricSecretKey
+} = require('dhole-crypto');
+
+let foxSecret = AsymmetricSecretKey.generate();
+let foxPublic = foxSecret.getPublicKey();
+
+let wolfSecret = AsymmetricSecretKey.generate();
+let wolfPublic = wolfSecret.getPublicKey();
+
+let message = "Only you can decrypt this message, and you can verify I sent it.";
+let encrypted = Asymmetric.encrypt(message, foxPublic, wolfSecret);
+let decrypted = Asymmetric.decrypt(encrypted, foxSecret, wolfPublic);
+console.log(decrypted);

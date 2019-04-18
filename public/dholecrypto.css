@@ -1,0 +1,30 @@
+body {
+    background: url("/ansi-dhole.png");
+    background-attachment: fixed;
+    background-color: #f0f0f0;
+    background-position-x: right;
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+    -webkit-background-size: auto;
+    background-size: auto;
+}
+#main_container {
+    background-color: rgba(240, 240, 240, 0.833);
+    box-shadow: #f0f0f0 0 0 1rem;
+    margin-bottom: -1rem;
+    min-height: 100vh;
+}
+#front-tab-container {
+    background-color: #e0e0e0;
+    box-shadow: #e0e0e0 0 0 0.5rem;
+    padding: 0 1rem 0.25rem 1rem;
+    margin-bottom: 0.5rem;
+}
+.quote {
+    background-color: #e0e0e0;
+    border-color: #999;
+    border-width: 0 0 0 4px;
+    border-style: solid;
+    margin: 0.25rem 0.5rem 0.25rem 1.5rem;
+    padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+}

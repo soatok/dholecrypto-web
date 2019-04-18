@@ -1,0 +1,24 @@
+{
+  "name": "soatok/dholecrypto-web",
+  "type": "project",
+  "require": {
+    "php": ">= 7.2.3 || >= 7.3.1",
+    "nikic/fast-route": "^1",
+    "soatok/dhole-cryptography": "^1",
+    "twig/twig": "^2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Soatok\\DholeCryptoWeb\\": "src/"
+    }
+  },
+  "require-dev": {
+    "vimeo/psalm": "^3"
+  },
+  "config": {
+    "process-timeout": 0
+  },
+  "scripts": {
+    "start": "php -S localhost:9001 public/index.php"
+  }
+}

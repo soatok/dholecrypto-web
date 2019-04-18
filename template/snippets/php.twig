@@ -1,0 +1,15 @@
+&lt;?php
+use Soatok\DholeCrypto\Asymmetric;
+use Soatok\DholeCrypto\Key\AsymmetricSecretKey;
+use ParagonIE\HiddenString\HiddenString;
+
+$foxSecret = AsymmetricSecretKey::generate();
+$foxPublic = $foxSecret->getPublicKey();
+
+$wolfSecret = AsymmetricSecretKey::generate();
+$wolfPublic = $wolfSecret->getPublicKey();
+
+$message = new HiddenString("Only you can decrypt this message, and you can verify I sent it.");
+$encrypt = Asymmetric::encrypt($message, $wolfPublic, $foxSecret);
+$decrypt = Asymmetric::decrypt($encrypt, $wolfSecret, $foxPublic);
+echo $decrypt->getString();

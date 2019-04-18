@@ -1,0 +1,22 @@
+const {
+    AsymmetricSecretKey,
+    Keyring,
+    SymmetricKey
+} = require('dhole-crypto');
+
+let foxSecret = AsymmetricSecretKey.generate();
+let foxPublic = foxSecret.getPublicKey();
+let symmetric = SymmetricKey.generate();
+
+// Load a serializer
+let ring = new Keyring();
+
+// Serialize to string
+let sk = ring.save(foxSecret);
+let pk = ring.save(foxPublic);
+let key = ring.save(symmetric);
+
+// Load from string
+let loadSk = ring.load(sk);
+let loadPk = ring.load(pk);
+let loadSym = ring.load(key);

@@ -11,26 +11,26 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="nav-item active">
-                <a class="nav-link active" href="#php" aria-controls="php" role="tab" data-toggle="tab">PHP</a>
+                <a class="nav-link active" href="#nodejs" aria-controls="nodejs" role="tab" data-toggle="tab">Node.js</a>
             </li>
             <li role="presentation" class="nav-item">
-                <a class="nav-link" href="#nodejs" aria-controls="nodejs" role="tab" data-toggle="tab">Node.js</a>
+                <a class="nav-link" href="#php" aria-controls="php" role="tab" data-toggle="tab">PHP</a>
             </li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="php">
-                <pre><code class="php">{% include "snippets/php.twig" %}</code></pre>
-                <p>Get Dhole for your PHP project:</p>
-                <pre><code class="terminal">composer require soatok/dhole-cryptography</code></pre>
-                <p>Also available <a href="https://github.com/soatok/dhole-cryptography">on Github</a>.</p>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="nodejs">
+            <div role="tabpanel" class="tab-pane active" id="nodejs">
                 <pre><code class="js">{% include "snippets/nodejs.twig" %}</code></pre>
                 <p>Get Dhole for your Node.js project:</p>
                 <pre><code class="terminal">npm install dhole-crypto</code></pre>
                 <p>Also available <a href="https://github.com/soatok/dholecrypto-js">on Github</a>.</p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="php">
+                <pre><code class="php">{% include "snippets/php.twig" %}</code></pre>
+                <p>Get Dhole for your PHP project:</p>
+                <pre><code class="terminal">composer require soatok/dhole-cryptography</code></pre>
+                <p>Also available <a href="https://github.com/soatok/dhole-cryptography">on Github</a>.</p>
             </div>
         </div>
     </div>

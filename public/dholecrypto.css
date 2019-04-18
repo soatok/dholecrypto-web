@@ -11,7 +11,6 @@ body {
 #main_container {
     background-color: rgba(240, 240, 240, 0.833);
     box-shadow: #f0f0f0 0 0 1rem;
-    margin-bottom: -1rem;
     min-height: 100vh;
 }
 #front-tab-container {

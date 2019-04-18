@@ -129,6 +129,12 @@
                 The <code>hash()</code>, <code>needsRehash()</code>, and <code>verify()</code>
                 API was inspired by PHP's design.
             </p>
+            <p>
+                For security people: Passwords are hashed with Argon2id (and salted), then
+                encrypted with XChaCha20-Poly1305. If you keep your encryption key on
+                separate hardware from the database server, the encryption adds a security
+                gain above just storing plaintext hashes.
+            </p>
         </dd>
 
         <dt>Key management</dt>

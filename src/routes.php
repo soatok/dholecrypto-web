@@ -5,4 +5,5 @@ use Soatok\DholeCryptoWeb\View\{
 
 return FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', new Index());
+    $r->addRoute('GET', '', new Index());
 });

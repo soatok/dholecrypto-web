@@ -4,19 +4,21 @@ const {
     SymmetricKey
 } = require('dhole-crypto');
 
-let foxSecret = AsymmetricSecretKey.generate();
-let foxPublic = foxSecret.getPublicKey();
-let symmetric = SymmetricKey.generate();
+(async function () {
+    let foxSecret = await AsymmetricSecretKey.generate();
+    let foxPublic = foxSecret.getPublicKey();
+    let symmetric = await SymmetricKey.generate();
 
-// Load a serializer
-let ring = new Keyring();
+    // Load a serializer
+    let ring = new Keyring();
 
-// Serialize to string
-let sk = ring.save(foxSecret);
-let pk = ring.save(foxPublic);
-let key = ring.save(symmetric);
+    // Serialize to string
+    let sk = await ring.save(foxSecret);
+    let pk = await ring.save(foxPublic);
+    let key = await ring.save(symmetric);
 
-// Load from string
-let loadSk = ring.load(sk);
-let loadPk = ring.load(pk);
-let loadSym = ring.load(key);
+    // Load from string
+    let loadSk = await ring.load(sk);
+    let loadPk = await ring.load(pk);
+    let loadSym = await ring.load(key);
+})();

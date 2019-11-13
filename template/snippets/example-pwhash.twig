@@ -3,15 +3,17 @@ const {
     SymmetricKey
 } = require('dhole-crypto');
 
-/** @var {SymmetricKey} symmetricKey */
-let pwHandler = new Password(symmetricKey);
-let password = 'correct horse battery staple';
-let pwhash = pwHandler.hash(password);
+(async function () {
+    /** @var {SymmetricKey} symmetricKey */
+    let pwHandler = new Password(symmetricKey);
+    let password = 'correct horse battery staple';
+    let pwhash = await pwHandler.hash(password);
 
-if (pwHandler.verify(password, pwhash)) {
-    if (pwHandler.needsRehash(pwhash)) {
-        pwhash = pwHandler.hash(password);
-        // Store updated pwhash in database...
+    if (await pwHandler.verify(password, pwhash)) {
+        if (await pwHandler.needsRehash(pwhash)) {
+            pwhash = await pwHandler.hash(password);
+            // Store updated pwhash in database...
+        }
+        console.log('Access granted.');
     }
-    console.log('Access granted.');
-}
+})();

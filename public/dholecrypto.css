@@ -13,6 +13,10 @@ body {
     box-shadow: #f0f0f0 0 0 1rem;
     min-height: 100vh;
 }
+#h1-logo {
+    height: 1.2em;
+    vertical-align: text-bottom;
+}
 #front-tab-container {
     background-color: #e0e0e0;
     box-shadow: #e0e0e0 0 0 0.5rem;
@@ -26,4 +30,7 @@ body {
     border-style: solid;
     margin: 0.25rem 0.5rem 0.25rem 1.5rem;
     padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+}
+.text-center {
+    text-align: center;
 }
